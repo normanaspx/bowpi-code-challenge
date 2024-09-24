@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.todo_app.databinding.FragmentHomeBinding
 
 
@@ -39,6 +40,12 @@ class HomeFragment : Fragment() {
         binding.apply {
             tasksList.setHasFixedSize(true)
             tasksList.adapter = adapter
+        }
+
+        binding.fab.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToTaskDetailFragment()
+            )
         }
     }
 
