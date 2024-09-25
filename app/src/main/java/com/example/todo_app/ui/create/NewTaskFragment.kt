@@ -12,13 +12,18 @@ import com.example.todo_app.databinding.FragmentNewTaskBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class NewTaskFragment : Fragment() {
+
+    @Inject
+    lateinit var firebaseDatabase: DatabaseReference
 
     private var _binding: FragmentNewTaskBinding?=null
     private val binding get() = _binding!!
-    private lateinit var database: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,17 +37,12 @@ class NewTaskFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentNewTaskBinding.bind(view)
 
-        database = Firebase.database.reference
-
-
         binding.fab1.setOnClickListener {
-
             val task = Task(title = binding.editText.text.toString(), desc = binding.desc.text.toString())
-            database.child("users").child(task.id).setValue(task)
+            firebaseDatabase.child("users").child(task.id).setValue(task)
                 .addOnCompleteListener{
                     findNavController().navigateUp()
                 }
         }
-
     }
 }

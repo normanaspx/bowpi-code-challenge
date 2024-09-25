@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     alias(libs.plugins.androidx.navigation.safe.args) apply false
     alias(libs.plugins.gms.google.services) apply false
+    alias(libs.plugins.google.dagger.hilt) apply false
 }
 
 buildscript {

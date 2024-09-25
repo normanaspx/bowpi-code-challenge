@@ -10,6 +10,7 @@ material = "1.12.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
 googleServices = "4.4.1"
+hilt = "2.46"
 navigationFragmentKtx = "1.0.0"
 navigationSafeArgsGradlePluginVersion = "2.8.1"
 navigationUiKtx = "1.0.0"
@@ -35,9 +36,12 @@ com-google-gms-google-services-gradle-plugin = { group = "com.google.gms.google-
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
+google-dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+google-dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidx-navigation-safe-args = { id ="androidx.navigation.safeargs.kotlin",version.ref ="navigationSafeArgsGradlePluginVersion" }
 gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+google-dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

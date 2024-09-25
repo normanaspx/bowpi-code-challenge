@@ -21,7 +21,7 @@ class TaskAdapter(private var itemsList: List<Task>?,
 
             var database: DatabaseReference = Firebase.database.reference
             itemBinding.taskTitle.text = task.title
-            itemBinding.taskCheckbox.setOnCheckedChangeListener(null) // remove any existing listener from recycled view
+            itemBinding.taskCheckbox.setOnCheckedChangeListener(null)
             itemBinding.taskCheckbox.isChecked = task.completed
 
             if (task.completed) {

@@ -17,19 +17,23 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
+
+    @Inject
+    lateinit var firebaseDatabase: DatabaseReference
 
     private lateinit var adapter: TaskAdapter
     private var _binding: FragmentHomeBinding?=null
     private val binding get() = _binding!!
-    private lateinit var database: DatabaseReference
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -38,13 +42,8 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.bind(view)
 
-
-        database = Firebase.database.reference
-
-
         val list =  mutableListOf<Task>()
 
-        var ref = FirebaseDatabase.getInstance().getReference("users")
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 list.clear()
@@ -57,7 +56,6 @@ class HomeFragment : Fragment() {
                             HomeFragmentDirections.actionHomeFragmentToTaskDetailFragment2(it)
                         )
                     }
-
                     binding.apply {
                         tasksList.setHasFixedSize(true)
                         tasksList.adapter = adapter
@@ -70,7 +68,7 @@ class HomeFragment : Fragment() {
                 Log.w("Error", "loadPost:onCancelled", databaseError.toException())
             }
         }
-        ref.addValueEventListener(postListener)
+        firebaseDatabase.child("users").addValueEventListener(postListener)
 
         binding.fab.setOnClickListener {
             findNavController().navigate(
