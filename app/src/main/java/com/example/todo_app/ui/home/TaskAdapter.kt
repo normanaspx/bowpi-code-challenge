@@ -1,29 +1,44 @@
-package com.example.todo_app
+package com.example.todo_app.ui.home
 
-import android.content.Context
+import android.graphics.Paint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo_app.model.Task
 import com.example.todo_app.databinding.ListItemBinding
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-class TaskAdapter(private var itemsList: List<Task>?
+class TaskAdapter(private var itemsList: List<Task>?,
+                  private val clickCallback: ((Task) -> Unit)?
     ) : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
 
     class ViewHolder(private val itemBinding: ListItemBinding
     ) :RecyclerView.ViewHolder(itemBinding.root){
         fun bind(task: Task) {
+
             var database: DatabaseReference = Firebase.database.reference
             itemBinding.taskTitle.text = task.title
+            itemBinding.taskCheckbox.setOnCheckedChangeListener(null) // remove any existing listener from recycled view
+            itemBinding.taskCheckbox.isChecked = task.completed
+
+            if (task.completed) {
+                itemBinding.taskTitle.apply {
+                    paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                }
+            }
+
             itemBinding.taskCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
-                //if (isChecked) {
+                if (isChecked) {
+                    itemBinding.taskTitle.apply {
+                        paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    }
                     database.child("users").child(task.id).child("completed").setValue(true)
-               // }
+                }else{
+                    database.child("users").child(task.id).child("completed").setValue(false)
+                }
             }
         }
     }
@@ -38,6 +53,9 @@ class TaskAdapter(private var itemsList: List<Task>?
         val item = itemsList?.get(position)
         if (item != null) {
             holder.bind(item)
+            holder.itemView.setOnClickListener() {
+                clickCallback?.invoke(item)
+            }
         }
     }
 

@@ -7,16 +7,28 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.todo_app.HomeFragment"
+        android:name="com.example.todo_app.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_taskDetailFragment"
             app:destination="@id/taskDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_taskDetailFragment2"
+            app:destination="@id/taskDetailFragment2" />
     </fragment>
     <fragment
         android:id="@+id/taskDetailFragment"
-        android:name="com.example.todo_app.TaskDetailFragment"
+        android:name="com.example.todo_app.ui.create.NewTaskFragment"
         android:label="fragment_task_detail"
-        tools:layout="@layout/fragment_task_detail" />
+        tools:layout="@layout/fragment_new_task" />
+    <fragment
+        android:id="@+id/taskDetailFragment2"
+        android:name="com.example.todo_app.ui.detail.TaskDetailFragment"
+        android:label="fragment_task_detail"
+        tools:layout="@layout/fragment_task_detail" >
+        <argument
+            android:name="task"
+            app:argType="com.example.todo_app.model.Task" />
+    </fragment>
 </navigation>

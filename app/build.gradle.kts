@@ -1,8 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.androidx.navigation.safe.args)
     alias(libs.plugins.gms.google.services)
+    id("kotlin-parcelize")
+    id ("androidx.navigation.safeargs")
 }
 
 android {

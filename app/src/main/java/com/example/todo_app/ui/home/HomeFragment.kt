@@ -1,4 +1,4 @@
-package com.example.todo_app
+package com.example.todo_app.ui.home
 
 import android.os.Bundle
 import android.util.Log
@@ -7,13 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.todo_app.R
+import com.example.todo_app.model.Task
 import com.example.todo_app.databinding.FragmentHomeBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.getValue
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -51,7 +52,11 @@ class HomeFragment : Fragment() {
                     for(snapshot: DataSnapshot in dataSnapshot.children){
                         list.add(snapshot.getValue(Task::class.java) as Task)
                     }
-                    adapter = TaskAdapter(list)
+                    adapter = TaskAdapter(list){
+                        findNavController().navigate(
+                            HomeFragmentDirections.actionHomeFragmentToTaskDetailFragment2(it)
+                        )
+                    }
 
                     binding.apply {
                         tasksList.setHasFixedSize(true)
@@ -66,9 +71,6 @@ class HomeFragment : Fragment() {
             }
         }
         ref.addValueEventListener(postListener)
-
-
-
 
         binding.fab.setOnClickListener {
             findNavController().navigate(
