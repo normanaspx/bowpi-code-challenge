@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.com.google.gms.google.services.gradle.plugin)
     implementation(libs.firebase.bom)
     implementation(libs.firebase.database.ktx)
+    implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

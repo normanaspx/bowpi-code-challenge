@@ -17,6 +17,7 @@ navigationSafeArgsGradlePlugin = "1.0.0"
 comGoogleGmsGoogleServicesGradlePlugin = "4.4.2"
 firebaseBom = "33.3.0"
 firebaseDatabaseKtx = "21.0.0"
+firebaseAuthKtx = "23.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -33,6 +34,7 @@ navigation-ui-ktx = { group = "android.arch.navigation", name = "navigation-ui-k
 com-google-gms-google-services-gradle-plugin = { group = "com.google.gms.google-services", name = "com.google.gms.google-services.gradle.plugin", version.ref = "comGoogleGmsGoogleServicesGradlePlugin" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
+firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

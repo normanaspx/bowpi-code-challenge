@@ -12,7 +12,7 @@ class TaskAdapter(private var itemsList: List<Task>?) : RecyclerView.Adapter<Tas
 
     class ViewHolder(private val itemBinding: ListItemBinding) :RecyclerView.ViewHolder(itemBinding.root){
         fun bind(task: Task) {
-            itemBinding.taskTitle.text = "hola"
+            itemBinding.taskTitle.text = task.title
         }
 
     }

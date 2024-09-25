@@ -1,13 +1,20 @@
 package com.example.todo_app
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.todo_app.databinding.FragmentHomeBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.getValue
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -35,25 +42,31 @@ class HomeFragment : Fragment() {
         database = Firebase.database.reference
 
 
-        val list = listOf<Task>(
-            Task(title = "hola"),
-            Task(title = "hola"),
-            Task(title = "hola"),
-            Task(title = "hola"),
-            Task(title = "hola"),
-                    Task(title = "hola"),
-            Task(title = "hola"),
-            Task(title = "hola"),
-            Task(title = "hola")
-        )
+        val list =  mutableListOf<Task>()
 
-        database.child("users").child(list[0].id.toString()).setValue(list[0])
+        var ref = FirebaseDatabase.getInstance().getReference("users")
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for(snapshot: DataSnapshot in dataSnapshot.children){
+                    list.add(snapshot.getValue(Task::class.java) as Task)
+                }
+                adapter = TaskAdapter(list)
+                binding.apply {
+                    tasksList.setHasFixedSize(true)
+                    tasksList.adapter = adapter
+                }
+            }
 
-        adapter = TaskAdapter(list)
-        binding.apply {
-            tasksList.setHasFixedSize(true)
-            tasksList.adapter = adapter
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w("Error", "loadPost:onCancelled", databaseError.toException())
+            }
         }
+        ref.addValueEventListener(postListener)
+
+
+
+
 
         binding.fab.setOnClickListener {
             findNavController().navigate(
