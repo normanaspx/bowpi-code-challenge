@@ -64,7 +64,6 @@ class HomeFragment : Fragment() {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
                 Log.w("Error", "loadPost:onCancelled", databaseError.toException())
             }
         }

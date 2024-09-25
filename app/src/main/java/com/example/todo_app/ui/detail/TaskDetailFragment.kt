@@ -37,8 +37,6 @@ class TaskDetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_task_detail, container, false)
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
