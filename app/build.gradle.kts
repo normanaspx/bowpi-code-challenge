@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.androidx.navigation.safe.args)
+    alias(libs.plugins.gms.google.services)
 }
 
 android {
@@ -48,6 +49,9 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
+    implementation(libs.com.google.gms.google.services.gradle.plugin)
+    implementation(libs.firebase.bom)
+    implementation(libs.firebase.database.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -9,10 +9,14 @@ appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
+googleServices = "4.4.1"
 navigationFragmentKtx = "1.0.0"
 navigationSafeArgsGradlePluginVersion = "2.8.1"
 navigationUiKtx = "1.0.0"
 navigationSafeArgsGradlePlugin = "1.0.0"
+comGoogleGmsGoogleServicesGradlePlugin = "4.4.2"
+firebaseBom = "33.3.0"
+firebaseDatabaseKtx = "21.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -26,9 +30,12 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 navigation-fragment-ktx = { group = "android.arch.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 navigation-ui-ktx = { group = "android.arch.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+com-google-gms-google-services-gradle-plugin = { group = "com.google.gms.google-services", name = "com.google.gms.google-services.gradle.plugin", version.ref = "comGoogleGmsGoogleServicesGradlePlugin" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidx-navigation-safe-args = { id ="androidx.navigation.safeargs.kotlin",version.ref ="navigationSafeArgsGradlePluginVersion" }
-
+gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
