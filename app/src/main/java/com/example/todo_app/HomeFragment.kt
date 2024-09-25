@@ -33,6 +33,10 @@ class HomeFragment : Fragment() {
             Task(title = "hola"),
             Task(title = "hola"),
             Task(title = "hola"),
+            Task(title = "hola"),
+                    Task(title = "hola"),
+            Task(title = "hola"),
+            Task(title = "hola"),
             Task(title = "hola")
         )
 
