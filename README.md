@@ -3,6 +3,7 @@
 - Inyección de depencias (Hilt)
 - Navigation Components
 - Firebase Realtime Database
+- Material Components
 
 ## Listado de tareas
 <img width="477" alt="Captura de pantalla 2024-09-25 a la(s) 10 35 34 a  m" src="https://github.com/user-attachments/assets/3520a6f5-2d47-4b4f-b285-4e342a898671">
