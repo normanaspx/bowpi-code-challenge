@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.todo_app.databinding.FragmentHomeBinding
 import com.example.todo_app.databinding.FragmentTaskDetailBinding
 import com.google.firebase.database.DatabaseReference
@@ -37,12 +38,10 @@ class TaskDetailFragment : Fragment() {
 
             val task = Task(title = binding.editText.text.toString(), desc = binding.desc.text.toString())
             database.child("users").child(task.id).setValue(task)
+                .addOnCompleteListener{
+                    findNavController().navigateUp()
+                }
         }
 
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.todo_app.databinding.FragmentHomeBinding
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -47,13 +46,17 @@ class HomeFragment : Fragment() {
         var ref = FirebaseDatabase.getInstance().getReference("users")
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for(snapshot: DataSnapshot in dataSnapshot.children){
-                    list.add(snapshot.getValue(Task::class.java) as Task)
-                }
-                adapter = TaskAdapter(list)
-                binding.apply {
-                    tasksList.setHasFixedSize(true)
-                    tasksList.adapter = adapter
+                list.clear()
+                if(dataSnapshot.exists()){
+                    for(snapshot: DataSnapshot in dataSnapshot.children){
+                        list.add(snapshot.getValue(Task::class.java) as Task)
+                    }
+                    adapter = TaskAdapter(list)
+
+                    binding.apply {
+                        tasksList.setHasFixedSize(true)
+                        tasksList.adapter = adapter
+                    }
                 }
             }
 
@@ -67,17 +70,11 @@ class HomeFragment : Fragment() {
 
 
 
-
         binding.fab.setOnClickListener {
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToTaskDetailFragment()
             )
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }
